@@ -1,6 +1,4 @@
-﻿using Marten.Events;
-
-namespace MartenSubClassAggregateTest;
+﻿namespace MartenSubClassAggregateTest;
 
 public record FooCreated(Guid Id);
 public record Bar1Created(Guid Id);
