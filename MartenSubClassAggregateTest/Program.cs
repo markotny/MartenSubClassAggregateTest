@@ -4,7 +4,6 @@ using MartenSubClassAggregateTest;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Weasel.Core;
 
 var builder = Host.CreateApplicationBuilder();
 
@@ -16,12 +15,9 @@ builder.Services.AddMarten((options) =>
 	}
 	options.Connection("Host=localhost;Port=5444;Username=postgres;Password=admin;Database=test");
 
-	if (builder.Environment.IsDevelopment())
-	{
-		options.AutoCreateSchemaObjects = AutoCreate.All;
-	}
-
-	options.Schema.For<Foo>().AddSubClass<Bar1>().AddSubClass<Bar2>();
+	options.Schema.For<Foo>()
+		.AddSubClass<Bar1>()
+		.AddSubClass<Bar2>();
 
 	options.Projections.Snapshot<Bar1>(SnapshotLifecycle.Inline);
 	options.Projections.Snapshot<Bar2>(SnapshotLifecycle.Inline);
