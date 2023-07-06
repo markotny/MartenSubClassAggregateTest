@@ -23,8 +23,9 @@ internal class Service : BackgroundService
 		var bar1Created = new Bar1Created(Guid.NewGuid());
 		session.Events.Append(bar1Created.Id, bar1Created);
 
-		var bar2Created = new Bar2Created(Guid.NewGuid());
-		session.Events.Append(bar2Created.Id, bar2Created);
+		var bar2Created = new Bar2Created(Guid.NewGuid(), "name");
+		var bar2NameChanged = new Bar2NameChanged("name2");
+		session.Events.Append(bar2Created.Id, bar2Created, bar2NameChanged);
 
 		await session.SaveChangesAsync();
 

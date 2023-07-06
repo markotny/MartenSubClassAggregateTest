@@ -19,9 +19,7 @@ builder.Services.AddMarten((options) =>
 		.AddSubClass<Bar1>()
 		.AddSubClass<Bar2>();
 
-	options.Projections.Snapshot<Bar1>(SnapshotLifecycle.Inline);
-	options.Projections.Snapshot<Bar2>(SnapshotLifecycle.Inline);
-	options.Projections.Snapshot<Foo>(SnapshotLifecycle.Inline);
+	options.Projections.Add(new FooAggregate(), ProjectionLifecycle.Inline);
 }).UseLightweightSessions().ApplyAllDatabaseChangesOnStartup();
 
 builder.Services.AddHostedService<Service>();
